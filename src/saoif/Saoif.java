@@ -25,7 +25,10 @@ public class Saoif {
             Scanner cardNumReader = new Scanner(cardNumFile);
             MAXCARDNUM = cardNumReader.nextInt();
         }catch(Exception e){
-            System.out.println("Fail to read \"MAXCARDNUM.txt\", that should only contain one integer.");
+            System.out.println("Fail to read \"MAXCARDNUM.txt\", that should only contain one integer.\n"
+                    + "Input properly and try again. \n"
+                    + "Bye");
+            System.exit(0);
         }
     }
     public static Card[] cards = new Card[MAXCARDNUM];
@@ -285,7 +288,8 @@ public class Saoif {
         
         try{
             buildCards();
-            o.println("Update successed, please restart the program");
+            o.println("Update successed, please restart the program\n");
+            o.println("Restart the whole terminal or IDE");
         }catch(Exception e){
             o.println("Please restart the program");
         }
@@ -329,7 +333,8 @@ public class Saoif {
                + "7) \"save\": input card nums to save card info into save.txt\n"
                + "8) \"banner\": input card titles and print details\n"
                + "9) \"banner.txt\": read all titles in the txt and run \"banner\"\n"
-               + "10) \"update\": update the web and pic files";
+               + "10) \"update\": update the web and pic files\n"
+               + "11) \"buffList\": get the entire bufflist";
        
        out.println(helpMessage);
        String input;
@@ -369,6 +374,12 @@ public class Saoif {
            if (input.equals("h")){
                 out.println(helpMessage);
                 continue;
+           }
+           if (input.equals("buffList")){
+               File file = new File("buffList.txt");
+               PrintStream f = new PrintStream(file);
+               f.println(Card.buffList);
+               continue;
            }
            if (input.equals("save")){
                int[] targetCardsNumber = new int[MAXCARDNUM];
